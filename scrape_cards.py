@@ -1,5 +1,5 @@
 '''
-Script for scraping both images of cards and infos
+Script for scraping both images of cards and their infos
 Save images in folder by convention ID.jpg
 Save cards info as csv
 '''
@@ -9,7 +9,7 @@ import requests
 import pandas as pd
 from tqdm import tqdm
 
-def scrape_cards():
+def scrape_cards(scrape_images=True):
     #Prepare requests and get total number of cards
     parameters = {'num': 100, 'offset': 0, 'view': 'List', 'misc': 'yes'}
     site_name = "https://db.ygoprodeck.com/api_internal/v7/cardinfo.php"
@@ -20,6 +20,7 @@ def scrape_cards():
     #Create pandas dataframe
     columns_names = ['Name', 'Desc', 'Type', 'Race', 'Archetype', 'Attribute', 'Atk', 'Def', 'Level']
     columns_names_lower = [x.lower() for x in columns_names]
+    columns_names.append('Price')
     cards_database = pd.DataFrame(columns=columns_names)
 
     #Create folder for images
@@ -44,22 +45,28 @@ def scrape_cards():
                     new_row.append(actual_card[single_column])
                 else:
                     new_row.append(None)
+
+            #Append price to row
+            new_row.append(actual_card['card_prices'][0]['tcgplayer_price'])
+
+            #Update database
             cards_database = cards_database.append(pd.DataFrame([new_row], columns=columns_names, index=[actual_card_id]))
 
             #Save image
-            img_url = actual_card['card_images'][0]['image_url']
-            img_req = requests.get(img_url, stream = True)
-            img_req.raise_for_status()
+            if scrape_images:
+                img_url = actual_card['card_images'][0]['image_url']
+                img_req = requests.get(img_url, stream = True)
+                img_req.raise_for_status()
 
-            with open("images/" + str(actual_card_id) + ".jpg", 'wb') as f:
-                f.write(img_req.content)
+                with open("images/" + str(actual_card_id) + ".jpg", 'wb') as f:
+                    f.write(img_req.content)
                 
     cards_database.index.name = "Id"
     cards_database.to_csv("cards_database.csv")
         
 
 def main():
-    scrape_cards()
+    scrape_cards(False)
 
 if __name__ == "__main__":
     main()
