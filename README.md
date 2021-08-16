@@ -1,8 +1,6 @@
 # YuGiOh-cards
 <b>Miscellaneous scripts connected with Yu-Gi-Oh trading card game.</b>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Yu-Gi-Oh%21_%28Logo%29.jpg" width="500">
-
 ## Scraping
 Script scrape_cards.py allow to scrape card images with their infos as csv. \
 You can disable image scraping by passing argument ``scrape_images=False``. \
