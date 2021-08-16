@@ -5,7 +5,7 @@
 Script scrape_cards.py allow to scrape card images with their infos as csv. \
 You can disable image scraping by passing argument ``scrape_images=False``. \
 Images are of size 421 x 614 px, and are not included in repository because of their weight (~670mb).\
-Scraping only card infos takes ~30secs, but with images it takes ~30min.  \
+Scraping only cards infos takes ~30secs, but with images it takes ~30min.  \
 File cards_database.csv contains following informations: 
 1. Name
 2. Desc (Description of card)
