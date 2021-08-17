@@ -21,3 +21,8 @@ File cards_database.csv contains following informations:
 10. Price
 
 Note: Please notice that for several type of cards (e.g. Spell cards) some of columns are empty.
+
+## Simple GAN
+Notebook SimpleGAN - creating YuGiOh images.ipynb present sample custom GAN on YuGiOh cards \
+Output after 100 epochs: \
+<img src="1gen100epoch.png">
