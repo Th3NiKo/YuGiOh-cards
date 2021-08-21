@@ -22,7 +22,8 @@ Note: Please notice that for several type of cards (e.g. Spell cards) some of co
 
 ## Simple GAN
 Notebook SimpleGAN - creating YuGiOh images.ipynb present sample custom GAN on YuGiOh cards \
-Output after 100 epochs: \
+Output after 100 epochs:
+
 <img src="1gen100epoch.png">
 
 ## Basic eda
